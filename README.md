@@ -1,6 +1,7 @@
 ## Formal Engine
 
-At the moment, it is just a C# console project using OpenTK, it features vertex colors, and vertices with window drawing and colors!
+At the moment, it is just a C# console project using OpenTK, it features 3D, a free camera, lighting and textures!
+This is technically not a game engine yet, at the moment it is a modular sample 3D OpenTK project to kickstart your development,
 
 ## Building the Code
 
