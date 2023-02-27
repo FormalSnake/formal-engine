@@ -16,16 +16,23 @@ namespace FormalEngine
         private int shaderProgramHandle;
         private int vertexArrayHandle;
 
-        public Game()
-            : base(GameWindowSettings.Default, NativeWindowSettings.Default)
+        public Game(int width = 1280, int height = 720, string title = "FormalEngine window")
+            : base(
+                  GameWindowSettings.Default,
+                  new NativeWindowSettings()
+                  {
+                      Title = title,
+                      Size = new Vector2i(width, height),
+                      WindowBorder = WindowBorder.Fixed,
+                      StartVisible = false,
+                      StartFocused = true,
+                      API = ContextAPI.OpenGL,
+                      Profile = ContextProfile.Core,
+                      APIVersion = new Version(3, 3)
+                  }
+                )
         {
-            // Center the window to the screen
-            this.CenterWindow(
-                new Vector2i(1280, 720)
-            );
-
-            // This sets the window title
-            this.Title = "FormalEngine window";
+            this.CenterWindow();
         }
 
         // When resizing the window
@@ -45,6 +52,8 @@ namespace FormalEngine
         // When window is opened
         protected override void OnLoad()
         {
+            this.IsVisible = true;
+
             // Set the color buffer
             GL.ClearColor
                 (Color4.DarkGreen);
@@ -124,6 +133,9 @@ namespace FormalEngine
         // When window is about to close
         protected override void OnUnload()
         {
+            GL.BindVertexArray(0);
+            GL.DeleteVertexArray(this.vertexArrayHandle);
+
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
             GL.DeleteBuffer(this.vertexBufferHandle);
 
