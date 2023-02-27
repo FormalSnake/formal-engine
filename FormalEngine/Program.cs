@@ -1,12 +1,24 @@
-﻿namespace FormalEngine
+﻿using OpenTK.Mathematics;
+using OpenTK.Windowing.Common;
+using OpenTK.Windowing.Desktop;
+
+namespace FormalEngine
 {
-    internal class Program
+    public static class Program
     {
-        static void Main(string[] args)
+        private static void Main()
         {
-            using (Game game = new Game())
+            var nativeWindowSettings = new NativeWindowSettings()
             {
-                game.Run();
+                Size = new Vector2i(800, 600),
+                Title = "FormalEngine window",
+                // This is needed to run on macos
+                Flags = ContextFlags.ForwardCompatible,
+            };
+
+            using (var window = new Window(GameWindowSettings.Default, nativeWindowSettings))
+            {
+                window.Run();
             }
         }
     }

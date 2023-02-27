@@ -60,3 +60,9 @@ E:/Documents/Development/formal-engine/FormalEngine/FormalEngine/obj/Debug/net6.
 /Users/kyandesutter/development/formal-engine/FormalEngine/obj/Debug/net6.0/FormalEngine.genruntimeconfig.cache
 /Users/kyandesutter/development/formal-engine/FormalEngine/bin/Debug/net6.0/Shaders/shader.frag
 /Users/kyandesutter/development/formal-engine/FormalEngine/bin/Debug/net6.0/Shaders/shader.vert
+/Users/kyandesutter/development/formal-engine/FormalEngine/bin/Debug/net6.0/StbImageSharp.dll
+/Users/kyandesutter/development/formal-engine/FormalEngine/bin/Debug/net6.0/Resources/container.png
+/Users/kyandesutter/development/formal-engine/FormalEngine/bin/Debug/net6.0/Resources/awesomeface.png
+/Users/kyandesutter/development/formal-engine/FormalEngine/bin/Debug/net6.0/Shaders/lighting.frag
+/Users/kyandesutter/development/formal-engine/FormalEngine/bin/Debug/net6.0/Resources/container2.png
+/Users/kyandesutter/development/formal-engine/FormalEngine/bin/Debug/net6.0/Resources/container2_specular.png

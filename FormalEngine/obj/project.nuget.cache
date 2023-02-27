@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "YwsC1iOBD0uBAtGW2Dt4PCEbeXU3I2ON048QCOyTJfXQLPn2tGFrllGjkT6VLjexoG7NalM4vzwDcjKJ6yV4RQ==",
+  "dgSpecHash": "ZDRGS9hlqFasYsKWdlIAmg//OfAkC5iEnGbqrWyUN5RACD5GTqZiU0IMDeAh8UQ5as//jMInAFqO5k4pqHxpYg==",
   "success": true,
   "projectFilePath": "/Users/kyandesutter/development/formal-engine/FormalEngine/FormalEngine.csproj",
   "expectedPackageFiles": [
@@ -15,6 +15,7 @@
     "/Users/kyandesutter/.nuget/packages/opentk.windowing.common/4.7.7/opentk.windowing.common.4.7.7.nupkg.sha512",
     "/Users/kyandesutter/.nuget/packages/opentk.windowing.desktop/4.7.7/opentk.windowing.desktop.4.7.7.nupkg.sha512",
     "/Users/kyandesutter/.nuget/packages/opentk.windowing.graphicslibraryframework/4.7.7/opentk.windowing.graphicslibraryframework.4.7.7.nupkg.sha512",
+    "/Users/kyandesutter/.nuget/packages/stbimagesharp/2.27.13/stbimagesharp.2.27.13.nupkg.sha512",
     "/Users/kyandesutter/.nuget/packages/system.runtime.compilerservices.unsafe/5.0.0/system.runtime.compilerservices.unsafe.5.0.0.nupkg.sha512"
   ],
   "logs": []
