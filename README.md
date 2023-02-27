@@ -1,3 +1,4 @@
+![Alt text](Images/banner.png?raw=true)
 ## Formal Engine
 
 At the moment, it is just a C# console project using OpenTK, it features 3D, a free camera, lighting and textures!
