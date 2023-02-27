@@ -409,26 +409,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\kyani\\.nuget\\packages\\": {}
+    "/Users/kyandesutter/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Documents\\Development\\formal-engine\\FormalEngine\\FormalEngine\\FormalEngine.csproj",
+      "projectUniqueName": "/Users/kyandesutter/development/formal-engine/FormalEngine/FormalEngine.csproj",
       "projectName": "FormalEngine",
-      "projectPath": "E:\\Documents\\Development\\formal-engine\\FormalEngine\\FormalEngine\\FormalEngine.csproj",
-      "packagesPath": "C:\\Users\\kyani\\.nuget\\packages\\",
-      "outputPath": "E:\\Documents\\Development\\formal-engine\\FormalEngine\\FormalEngine\\obj\\",
+      "projectPath": "/Users/kyandesutter/development/formal-engine/FormalEngine/FormalEngine.csproj",
+      "packagesPath": "/Users/kyandesutter/.nuget/packages/",
+      "outputPath": "/Users/kyandesutter/development/formal-engine/FormalEngine/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\kyani\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/Users/kyandesutter/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net6.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -468,7 +466,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.402\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.200/RuntimeIdentifierGraph.json"
       }
     }
   }

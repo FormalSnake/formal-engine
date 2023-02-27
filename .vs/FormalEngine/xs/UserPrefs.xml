@@ -1,0 +1,26 @@
+﻿<Properties StartupConfiguration="{8E42D011-A19A-4E40-A641-F73419CCEE7D}|Default">
+  <MonoDevelop.Ide.ItemProperties.FormalEngine PreferredExecutionTarget="MonoDevelop.Default" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="FormalEngine/Game.cs">
+    <Files>
+      <File FileName="FormalEngine/Game.cs" Line="26" Column="56" />
+      <File FileName="FormalEngine/Program.cs" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="FormalEngine" expanded="True">
+            <Node name="FormalEngine" expanded="True">
+              <Node name="Game.cs" selected="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+</Properties>

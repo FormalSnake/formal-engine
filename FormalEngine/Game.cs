@@ -6,6 +6,7 @@ using OpenTK.Windowing.Common;
 using OpenTK.Windowing.Desktop;
 using OpenTK.Graphics.OpenGL;
 using OpenTK.Mathematics;
+using OpenTK.Windowing.GraphicsLibraryFramework;
 
 namespace FormalEngine
 {
@@ -15,6 +16,34 @@ namespace FormalEngine
         private int vertexBufferHandle;
         private int shaderProgramHandle;
         private int vertexArrayHandle;
+        private int elementBufferObject;
+
+        // Triangle vertices
+        float[] vertices = new float[]
+        {
+            0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // vertex0
+            0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // vertex1
+            -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, // vertex2
+        };
+        // Rectangle vertices
+        /*float[] vertices = new float[]{
+                 0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // top right
+                 0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // bottom right
+                -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, // bottom left
+                -0.5f,  0.5f, 0.0f, 1.0f, 0.0f, 1.0f, 1.0f, // top left
+            };*/
+
+        uint[] indices = new uint[]
+        {  // note that we start from 0!
+            0, 1, 3,   // first triangle
+            1, 2, 3    // second triangle
+        };
+        float[] texCoords = new float[]
+        {
+            0.0f, 0.0f,  // lower-left corner  
+            1.0f, 0.0f,  // lower-right corner
+            0.5f, 1.0f   // top-center corner
+        };
 
         public Game(int width = 1280, int height = 720, string title = "FormalEngine window")
             : base(
@@ -28,7 +57,7 @@ namespace FormalEngine
                       StartFocused = true,
                       API = ContextAPI.OpenGL,
                       Profile = ContextProfile.Core,
-                      APIVersion = new Version(3, 3)
+                      APIVersion = new Version(3, 3),
                   }
                 )
         {
@@ -61,18 +90,16 @@ namespace FormalEngine
             GL.ClearColor
                 (Color4.DarkGreen);
 
-            // Triangle vertices
-            float[] vertices = new float[]
-            {
-                0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // vertex0
-                0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // vertex1
-                -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, // vertex2
-            };
+            
 
             this.vertexBufferHandle = GL.GenBuffer();
             GL.BindBuffer(BufferTarget.ArrayBuffer, this.vertexBufferHandle);
-            GL.BufferData(BufferTarget.ArrayBuffer, vertices.Length * sizeof(float), vertices, BufferUsageHint.StaticDraw);
+            GL.BufferData(BufferTarget.ArrayBuffer, this.vertices.Length * sizeof(float), this.vertices, BufferUsageHint.StaticDraw);
             GL.BindBuffer(BufferTarget.ArrayBuffer, 0);
+
+            this.elementBufferObject = GL.GenBuffer();
+            GL.BindBuffer(BufferTarget.ElementArrayBuffer, this.elementBufferObject);
+            GL.BufferData(BufferTarget.ElementArrayBuffer, this.indices.Length * sizeof(uint), this.indices, BufferUsageHint.StaticDraw);
 
             this.vertexArrayHandle = GL.GenVertexArray();
             GL.BindVertexArray(this.vertexArrayHandle);
@@ -88,35 +115,10 @@ namespace FormalEngine
 
             GL.BindVertexArray(0);
 
-            string vertexShaderCode =
-                @"
-                #version 330 core
 
-                layout (location = 0) in vec3 aPosition;
-                layout (location = 1) in vec4 aColor;
+            string vertexShaderCode = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"Shaders/shader.vert"));
 
-                out vec4 vColor;
-
-                void main()
-                {
-                    vColor = aColor;
-                    gl_Position = vec4(aPosition, 1.0);
-                }
-                ";
-
-            string fragmentShaderCode = 
-                @"
-                    #version 330 core
-
-                    in vec4 vColor;
-
-                    out vec4 pixelColor;
-
-                    void main()
-                    {
-                        pixelColor = vColor;
-                    }
-                ";
+            string fragmentShaderCode = File.ReadAllText(Path.Combine(Environment.CurrentDirectory, @"Shaders/shader.frag"));
 
             int vertexShaderHandle = GL.CreateShader(ShaderType.VertexShader);
             GL.ShaderSource(vertexShaderHandle, vertexShaderCode);
@@ -138,6 +140,8 @@ namespace FormalEngine
 
             GL.DeleteShader(vertexShaderHandle);
             GL.DeleteShader(fragmentShaderHandle);
+
+
 
             base.OnLoad();
         }
@@ -161,6 +165,20 @@ namespace FormalEngine
         // Every frame
         protected override void OnUpdateFrame(FrameEventArgs args)
         {
+            KeyboardState input = KeyboardState;
+
+            if (input.IsKeyDown(Keys.Escape))
+            {
+                Close();
+            }
+            Vector4 vec = new Vector4(1.0f, 0.0f, 0.0f, 1.0f);
+            Matrix4 rotation = Matrix4.CreateRotationZ(MathHelper.DegreesToRadians(90.0f));
+            Matrix4 scale = Matrix4.CreateScale(0.5f, 0.5f, 0.5f);
+            Matrix4 trans = rotation * scale;
+            vec *= trans;
+            //Console.WriteLine("{0}, {1}, {2}", vec.X, vec.Y, vec.Z);
+
+
             base.OnUpdateFrame(args);
         }
 
@@ -173,10 +191,14 @@ namespace FormalEngine
 
             GL.UseProgram
                 (this.shaderProgramHandle);
+
             GL.BindVertexArray(this.vertexBufferHandle);
 
             GL.DrawArrays
-                (PrimitiveType.Triangles, 0, 3);
+                (PrimitiveType.Triangles, 0, this.indices.Length);
+
+
+            GL.DrawElements(PrimitiveType.Triangles, this.indices.Length, DrawElementsType.UnsignedInt, 0);
 
             // Display the buffer
             this.Context.SwapBuffers();
