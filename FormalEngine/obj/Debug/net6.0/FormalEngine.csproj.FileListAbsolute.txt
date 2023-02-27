@@ -1,0 +1,15 @@
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\bin\Debug\net6.0\FormalEngine.exe
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\bin\Debug\net6.0\FormalEngine.deps.json
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\bin\Debug\net6.0\FormalEngine.runtimeconfig.json
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\bin\Debug\net6.0\FormalEngine.dll
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\bin\Debug\net6.0\FormalEngine.pdb
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\obj\Debug\net6.0\FormalEngine.csproj.AssemblyReference.cache
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\obj\Debug\net6.0\FormalEngine.GeneratedMSBuildEditorConfig.editorconfig
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\obj\Debug\net6.0\FormalEngine.AssemblyInfoInputs.cache
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\obj\Debug\net6.0\FormalEngine.AssemblyInfo.cs
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\obj\Debug\net6.0\FormalEngine.csproj.CoreCompileInputs.cache
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\obj\Debug\net6.0\FormalEngine.dll
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\obj\Debug\net6.0\refint\FormalEngine.dll
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\obj\Debug\net6.0\FormalEngine.pdb
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\obj\Debug\net6.0\FormalEngine.genruntimeconfig.cache
+E:\Documents\Development\formal-engine\FormalEngine\FormalEngine\obj\Debug\net6.0\ref\FormalEngine.dll
