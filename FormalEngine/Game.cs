@@ -33,6 +33,7 @@ namespace FormalEngine
                 )
         {
             this.CenterWindow();
+            Console.WriteLine("Window starting...");
         }
 
         // When resizing the window
@@ -46,6 +47,7 @@ namespace FormalEngine
                 e.Width, // Window width
                 e.Height // Window height
             );
+            Console.WriteLine("Window resized!");
             base.OnResize(e);
         }
 
@@ -53,6 +55,7 @@ namespace FormalEngine
         protected override void OnLoad()
         {
             this.IsVisible = true;
+            Console.WriteLine("Window loaded!");
 
             // Set the color buffer
             GL.ClearColor
@@ -61,9 +64,9 @@ namespace FormalEngine
             // Triangle vertices
             float[] vertices = new float[]
             {
-                0.0f, 0.5f, 0.0f, // vertex0
-                0.5f, -0.5f, 0.0f, // vertex1
-                -0.5f, -0.5f, 0.0f, // vertex2
+                0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f, 1.0f, // vertex0
+                0.5f, -0.5f, 0.0f, 0.0f, 1.0f, 0.0f, 1.0f, // vertex1
+                -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f, 1.0f, // vertex2
             };
 
             this.vertexBufferHandle = GL.GenBuffer();
@@ -77,8 +80,11 @@ namespace FormalEngine
             GL.BindBuffer
                 (BufferTarget.ArrayBuffer, this.vertexBufferHandle);
             GL.VertexAttribPointer
-                (0, 3, VertexAttribPointerType.Float, false, 3 * sizeof(float), 0);
+                (0, 3, VertexAttribPointerType.Float, false, 7 * sizeof(float), 0);
+            GL.VertexAttribPointer
+                (1, 4, VertexAttribPointerType.Float, false, 7 * sizeof(float), 3 * sizeof(float));
             GL.EnableVertexAttribArray(0);
+            GL.EnableVertexAttribArray(1);
 
             GL.BindVertexArray(0);
 
@@ -87,9 +93,13 @@ namespace FormalEngine
                 #version 330 core
 
                 layout (location = 0) in vec3 aPosition;
+                layout (location = 1) in vec4 aColor;
+
+                out vec4 vColor;
 
                 void main()
                 {
+                    vColor = aColor;
                     gl_Position = vec4(aPosition, 1.0);
                 }
                 ";
@@ -98,11 +108,13 @@ namespace FormalEngine
                 @"
                     #version 330 core
 
+                    in vec4 vColor;
+
                     out vec4 pixelColor;
 
                     void main()
                     {
-                        pixelColor = vec4(0.8f, 0.8f, 0.1f, 1);
+                        pixelColor = vColor;
                     }
                 ";
 
@@ -133,6 +145,7 @@ namespace FormalEngine
         // When window is about to close
         protected override void OnUnload()
         {
+            Console.WriteLine("Quitting...");
             GL.BindVertexArray(0);
             GL.DeleteVertexArray(this.vertexArrayHandle);
 
