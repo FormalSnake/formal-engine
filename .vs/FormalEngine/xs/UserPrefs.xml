@@ -1,26 +1,33 @@
 ﻿<Properties StartupConfiguration="{8E42D011-A19A-4E40-A641-F73419CCEE7D}|Default">
-  <MonoDevelop.Ide.ItemProperties.FormalEngine PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="FormalEngine/Game.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="FormalEngine/Window.cs">
     <Files>
-      <File FileName="FormalEngine/Game.cs" Line="26" Column="56" />
-      <File FileName="FormalEngine/Program.cs" />
+      <File FileName="FormalEngine/Program.cs" Line="25" Column="2" />
+      <File FileName="FormalEngine/Common/Camera.cs" />
+      <File FileName="FormalEngine/Common/Shader.cs" />
+      <File FileName="FormalEngine/Common/Texture.cs" />
+      <File FileName="FormalEngine/Shaders/lighting.frag" />
+      <File FileName="FormalEngine/Window.cs" Line="118" Column="49" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="FormalEngine" expanded="True">
             <Node name="FormalEngine" expanded="True">
-              <Node name="Game.cs" selected="True" />
+              <Node name="Common" expanded="True" />
+              <Node name="Resources" expanded="True" />
+              <Node name="Shaders" expanded="True" />
+              <Node name="Window.cs" selected="True" />
             </Node>
           </Node>
         </State>
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
-  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.ItemProperties.FormalEngine PreferredExecutionTarget="MonoDevelop.Default" />
   <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
 </Properties>
