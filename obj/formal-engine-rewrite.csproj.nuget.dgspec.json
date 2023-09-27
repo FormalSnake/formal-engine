@@ -40,7 +40,7 @@
           "dependencies": {
             "ImGui.NET": {
               "target": "Package",
-              "version": "[1.78.0, )"
+              "version": "[1.89.9.2, )"
             },
             "Raylib-cs": {
               "target": "Package",

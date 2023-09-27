@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     "net6.0": {
-      "ImGui.NET/1.78.0": {
+      "ImGui.NET/1.89.9.2": {
         "type": "package",
         "dependencies": {
           "System.Buffers": "4.4.0",
@@ -10,12 +10,12 @@
           "System.Runtime.CompilerServices.Unsafe": "4.4.0"
         },
         "compile": {
-          "lib/netstandard2.0/ImGui.NET.dll": {
+          "lib/net6.0/ImGui.NET.dll": {
             "related": ".xml"
           }
         },
         "runtime": {
-          "lib/netstandard2.0/ImGui.NET.dll": {
+          "lib/net6.0/ImGui.NET.dll": {
             "related": ".xml"
           }
         },
@@ -24,9 +24,13 @@
             "assetType": "native",
             "rid": "linux-x64"
           },
-          "runtimes/osx-x64/native/libcimgui.dylib": {
+          "runtimes/osx/native/libcimgui.dylib": {
             "assetType": "native",
-            "rid": "osx-x64"
+            "rid": "osx"
+          },
+          "runtimes/win-arm64/native/cimgui.dll": {
+            "assetType": "native",
+            "rid": "win-arm64"
           },
           "runtimes/win-x64/native/cimgui.dll": {
             "assetType": "native",
@@ -110,20 +114,23 @@
     }
   },
   "libraries": {
-    "ImGui.NET/1.78.0": {
-      "sha512": "ArYtGX3VcVh7+K6DfO4p6lY2r+NMZ5TArfMD8TSYEmF/UcWIZC/yM1SC7L6bsjQ+9brdv2aXGTexz8z0ZvvTxw==",
+    "ImGui.NET/1.89.9.2": {
+      "sha512": "9nBLsib++tvKz8/4/5n7RCqNINbs9sDdEmESglW270VaBPJbjAepWxOuPBFLF7ifDDBfh/Vu+GSY++Pdas8JcQ==",
       "type": "package",
-      "path": "imgui.net/1.78.0",
+      "path": "imgui.net/1.89.9.2",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
         "build/net40/ImGui.NET.targets",
-        "imgui.net.1.78.0.nupkg.sha512",
+        "imgui.net.1.89.9.2.nupkg.sha512",
         "imgui.net.nuspec",
+        "lib/net6.0/ImGui.NET.dll",
+        "lib/net6.0/ImGui.NET.xml",
         "lib/netstandard2.0/ImGui.NET.dll",
         "lib/netstandard2.0/ImGui.NET.xml",
         "runtimes/linux-x64/native/libcimgui.so",
-        "runtimes/osx-x64/native/libcimgui.dylib",
+        "runtimes/osx/native/libcimgui.dylib",
+        "runtimes/win-arm64/native/cimgui.dll",
         "runtimes/win-x64/native/cimgui.dll",
         "runtimes/win-x86/native/cimgui.dll"
       ]
@@ -248,7 +255,7 @@
   },
   "projectFileDependencyGroups": {
     "net6.0": [
-      "ImGui.NET >= 1.78.0",
+      "ImGui.NET >= 1.89.9.2",
       "Raylib-cs >= 4.5.0.4"
     ]
   },
@@ -291,7 +298,7 @@
         "dependencies": {
           "ImGui.NET": {
             "target": "Package",
-            "version": "[1.78.0, )"
+            "version": "[1.89.9.2, )"
           },
           "Raylib-cs": {
             "target": "Package",

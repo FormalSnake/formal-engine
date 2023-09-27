@@ -1,17 +1,17 @@
 {
   "version": 2,
-  "dgSpecHash": "VlJkI0U7mnnRfppuuzpqa2HU+zBgi+9n4x6ONv+E6JDzuMH69WuqWus6M5D1eKcXHzcT4TnY/47bmQZ3J/TjWg==",
+  "dgSpecHash": "czWz0ziEDdji6mU8kDGJO8+qmik92RKALN2MENPhTk2S2Zh9QpBbAK1QB6B6GBcEduWWmTZIoNjKB+FYGYTwFw==",
   "success": true,
   "projectFilePath": "/Users/kyandesutter/development/formal-engine-rewrite/formal-engine-rewrite.csproj",
   "expectedPackageFiles": [
-    "/Users/kyandesutter/.nuget/packages/imgui.net/1.78.0/imgui.net.1.78.0.nupkg.sha512",
+    "/Users/kyandesutter/.nuget/packages/imgui.net/1.89.9.2/imgui.net.1.89.9.2.nupkg.sha512",
     "/Users/kyandesutter/.nuget/packages/raylib-cs/4.5.0.4/raylib-cs.4.5.0.4.nupkg.sha512",
     "/Users/kyandesutter/.nuget/packages/system.buffers/4.4.0/system.buffers.4.4.0.nupkg.sha512",
     "/Users/kyandesutter/.nuget/packages/system.numerics.vectors/4.5.0/system.numerics.vectors.4.5.0.nupkg.sha512",
     "/Users/kyandesutter/.nuget/packages/system.runtime.compilerservices.unsafe/4.4.0/system.runtime.compilerservices.unsafe.4.4.0.nupkg.sha512",
-    "/Users/kyandesutter/.nuget/packages/microsoft.netcore.app.ref/6.0.22/microsoft.netcore.app.ref.6.0.22.nupkg.sha512",
     "/Users/kyandesutter/.nuget/packages/microsoft.aspnetcore.app.ref/6.0.22/microsoft.aspnetcore.app.ref.6.0.22.nupkg.sha512",
-    "/Users/kyandesutter/.nuget/packages/microsoft.netcore.app.host.osx-arm64/6.0.22/microsoft.netcore.app.host.osx-arm64.6.0.22.nupkg.sha512"
+    "/Users/kyandesutter/.nuget/packages/microsoft.netcore.app.host.osx-arm64/6.0.22/microsoft.netcore.app.host.osx-arm64.6.0.22.nupkg.sha512",
+    "/Users/kyandesutter/.nuget/packages/microsoft.netcore.app.ref/6.0.22/microsoft.netcore.app.ref.6.0.22.nupkg.sha512"
   ],
   "logs": []
 }
