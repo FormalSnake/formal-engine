@@ -80,6 +80,19 @@
           }
         }
       },
+      "rlImgui-cs/1.0.2": {
+        "type": "package",
+        "dependencies": {
+          "ImGui.NET": "1.89.7.1",
+          "Raylib-cs": "4.5.0.4"
+        },
+        "compile": {
+          "lib/net6.0/rlImGui.dll": {}
+        },
+        "runtime": {
+          "lib/net6.0/rlImGui.dll": {}
+        }
+      },
       "System.Buffers/4.4.0": {
         "type": "package",
         "compile": {
@@ -155,6 +168,20 @@
         "runtimes/osx-x64/native/libraylib.dylib",
         "runtimes/win-x64/native/raylib.dll",
         "runtimes/win-x86/native/raylib.dll"
+      ]
+    },
+    "rlImgui-cs/1.0.2": {
+      "sha512": "+XrLGLCcYgl9Td7ewFNj9KbkrluP5IqcStDaFfr3uVwCD/k8DC2Sa39ZjTDpf0omGdlw77ILeQ/OpKCsQ0lPFg==",
+      "type": "package",
+      "path": "rlimgui-cs/1.0.2",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "LICENSE",
+        "README.md",
+        "lib/net6.0/rlImGui.dll",
+        "rlimgui-cs.1.0.2.nupkg.sha512",
+        "rlimgui-cs.nuspec"
       ]
     },
     "System.Buffers/4.4.0": {
@@ -256,7 +283,8 @@
   "projectFileDependencyGroups": {
     "net6.0": [
       "ImGui.NET >= 1.89.9.2",
-      "Raylib-cs >= 4.5.0.4"
+      "Raylib-cs >= 4.5.0.4",
+      "rlImgui-cs >= 1.0.2"
     ]
   },
   "packageFolders": {
@@ -303,6 +331,10 @@
           "Raylib-cs": {
             "target": "Package",
             "version": "[4.5.0.4, )"
+          },
+          "rlImgui-cs": {
+            "target": "Package",
+            "version": "[1.0.2, )"
           }
         },
         "imports": [

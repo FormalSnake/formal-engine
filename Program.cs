@@ -3,7 +3,7 @@ using Raylib_cs;
 using static Raylib_cs.Raylib;
 using static Examples.Rlights;
 using Examples;
-using ImGuiDemo;
+using rlImGui_cs;
 using ImGuiNET;
 
 namespace HelloWorld;
@@ -15,16 +15,12 @@ class Program
         const int screenWidth = 1280;
         const int screenHeight = 720;
         Raylib.SetTraceLogCallback(&Logging.LogConsole);
-        Raylib.SetConfigFlags(ConfigFlags.FLAG_MSAA_4X_HINT);
+	Raylib.SetConfigFlags(ConfigFlags.FLAG_MSAA_4X_HINT | ConfigFlags.FLAG_VSYNC_HINT);
         Raylib.InitWindow(screenWidth, screenHeight, "Hello World");
         Raylib.SetWindowState(ConfigFlags.FLAG_WINDOW_RESIZABLE);
         Raylib.InitAudioDevice();
-
-ImguiController controller = new ImguiController();
-            TestScreen testScreen = new TestScreen();
-
-            controller.Load(screenWidth, screenHeight);
-            // testScreen.Load();
+        Raylib.SetTargetFPS(144);
+	rlImGui.Setup(true);
 
         Camera3D camera = new Camera3D();
         camera.position = new Vector3(5.0f, 5.0f, 5.0f); // Camera position
@@ -108,15 +104,9 @@ ImguiController controller = new ImguiController();
         ModelAnimation[] modelAnimations = modelAnimationsSpan.ToArray();
 
         Vector3 position = new Vector3(0.0f, 0.0f, 0.0f);
-        Raylib.DisableCursor();
-        Raylib.SetTargetFPS(75);
 
         while (!Raylib.WindowShouldClose())
         {
-float dt = Raylib.GetFrameTime();
-
-                // Feed the input events to our ImGui controller, which passes them through to ImGui.
-                controller.Update(dt);
             Raylib.UpdateCamera(ref camera, CameraMode.CAMERA_THIRD_PERSON);
 
             if (IsKeyPressed(KeyboardKey.KEY_Y))
@@ -162,13 +152,14 @@ float dt = Raylib.GetFrameTime();
             DrawFPS(10, 10);
 
             // Raylib.DrawText("Kakske", 12, 12, 20, Color.BLACK);
-
+	    rlImGui.Begin();
+	    ImGui.ShowDemoWindow();
+	    rlImGui.End();
             Raylib.EndDrawing();
         }
-	            controller.Dispose();
         Raylib.UnloadModel(model);
         Raylib.UnloadModel(planeModel);
-
+	rlImGui.Shutdown();
         Raylib.CloseWindow();
     }
 }

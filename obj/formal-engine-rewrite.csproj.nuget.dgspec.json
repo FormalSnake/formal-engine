@@ -45,6 +45,10 @@
             "Raylib-cs": {
               "target": "Package",
               "version": "[4.5.0.4, )"
+            },
+            "rlImgui-cs": {
+              "target": "Package",
+              "version": "[1.0.2, )"
             }
           },
           "imports": [

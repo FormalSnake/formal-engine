@@ -9,7 +9,8 @@
       "formal-engine-rewrite/1.0.0": {
         "dependencies": {
           "ImGui.NET": "1.89.9.2",
-          "Raylib-cs": "4.5.0.4"
+          "Raylib-cs": "4.5.0.4",
+          "rlImgui-cs": "1.0.2"
         },
         "runtime": {
           "formal-engine-rewrite.dll": {}
@@ -93,6 +94,18 @@
           }
         }
       },
+      "rlImgui-cs/1.0.2": {
+        "dependencies": {
+          "ImGui.NET": "1.89.9.2",
+          "Raylib-cs": "4.5.0.4"
+        },
+        "runtime": {
+          "lib/net6.0/rlImGui.dll": {
+            "assemblyVersion": "1.0.2.0",
+            "fileVersion": "1.0.2.0"
+          }
+        }
+      },
       "System.Buffers/4.4.0": {},
       "System.Numerics.Vectors/4.5.0": {},
       "System.Runtime.CompilerServices.Unsafe/4.4.0": {}
@@ -117,6 +130,13 @@
       "sha512": "sha512-soBZJzafgOMdlR3edjHLhN9pjIzosEQ0yZVRDUrOalDvtdc76Br2HaLiszEjCdJDIav7SATbURCkxvWB7Qv4qg==",
       "path": "raylib-cs/4.5.0.4",
       "hashPath": "raylib-cs.4.5.0.4.nupkg.sha512"
+    },
+    "rlImgui-cs/1.0.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-+XrLGLCcYgl9Td7ewFNj9KbkrluP5IqcStDaFfr3uVwCD/k8DC2Sa39ZjTDpf0omGdlw77ILeQ/OpKCsQ0lPFg==",
+      "path": "rlimgui-cs/1.0.2",
+      "hashPath": "rlimgui-cs.1.0.2.nupkg.sha512"
     },
     "System.Buffers/4.4.0": {
       "type": "package",
