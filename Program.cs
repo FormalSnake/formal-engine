@@ -21,10 +21,10 @@ class Program
         Raylib.InitAudioDevice();
 
 ImguiController controller = new ImguiController();
-            EditorScreen editor = new EditorScreen();
+            TestScreen testScreen = new TestScreen();
 
             controller.Load(screenWidth, screenHeight);
-            editor.Load();
+            // testScreen.Load();
 
         Camera3D camera = new Camera3D();
         camera.position = new Vector3(5.0f, 5.0f, 5.0f); // Camera position
@@ -117,7 +117,6 @@ float dt = Raylib.GetFrameTime();
 
                 // Feed the input events to our ImGui controller, which passes them through to ImGui.
                 controller.Update(dt);
-                editor.Update(dt);
             Raylib.UpdateCamera(ref camera, CameraMode.CAMERA_THIRD_PERSON);
 
             if (IsKeyPressed(KeyboardKey.KEY_Y))
