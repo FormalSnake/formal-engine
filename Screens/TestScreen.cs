@@ -9,16 +9,10 @@ namespace ImGuiDemo
 
         public TestScreen()
         {
-        }
-
-        public void Update()
-        {
-            {
-                // Display some text (you can use a format string too)
-                ImGui.Text("Hello, world!");
-
-            }
-
+		ImGui.Begin("My DearImGui Window");
+		                ImGui.Text("Hello, world!");
+		ImGui.End();
         }
     }
+
 }
