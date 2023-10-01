@@ -97,24 +97,24 @@ float sliderSensitivity = 1.0f;
                 "X",
                 null,
                 buildingPos.X,
-                -1000.0f,
-                1000.0f
+                -100.0f,
+                100.0f
             );
             buildingPos.Y = GuiSliderBar(
                 new Rectangle(vector3EditorRect.x + 90, vector3EditorRect.y + 60, 120, 20),
                 "Y",
                 null,
                 buildingPos.Y,
-                -1000.0f,
-                1000.0f
+                -100.0f,
+                100.0f
             );
             buildingPos.Z = GuiSliderBar(
                 new Rectangle(vector3EditorRect.x + 90, vector3EditorRect.y + 90, 120, 20),
                 "Z",
                 null,
                 buildingPos.Z,
-                -1000.0f,
-                1000.0f
+                -100.0f,
+                100.0f
             );
             DrawText(
                 $"Vector3: ({buildingPos.X}, {buildingPos.Y}, {buildingPos.Z})",
