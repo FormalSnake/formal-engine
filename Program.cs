@@ -15,8 +15,8 @@ class Program
 {
     public static unsafe void Main()
     {
-        const int screenWidth = 1280;
-        const int screenHeight = 720;
+        int screenWidth = 1280;
+        int screenHeight = 720;
         // Raylib.SetTraceLogCallback(&Logging.LogConsole);
         Raylib.SetConfigFlags(ConfigFlags.FLAG_MSAA_4X_HINT | ConfigFlags.FLAG_VSYNC_HINT);
         Raylib.InitWindow(screenWidth, screenHeight, "Formal Engine");
@@ -44,11 +44,16 @@ class Program
         Model model = Raylib.LoadModel("resources/models/gltf/robot.glb");
         SetMaterialTexture(planeModel.materials, MATERIAL_MAP_DIFFUSE, tx);
         SelectableObject building = new SelectableObject();
-        building.Initialize("Barracks", new Vector3(0.0f, 1.0f, 0.0f));
+        Vector3 buildingPos = new Vector3(0.0f, 1.0f, 0.0f);
+        building.Initialize("Barracks", buildingPos);
+        Rectangle vector3EditorRect = new Rectangle(20, 40, 300, 140);
+float sliderSensitivity = 1.0f;
         // Raylib.SetCameraMode(camera, CameraMode.CAMERA_THIRD_PERSON);
 
         while (!Raylib.WindowShouldClose())
         {
+            screenWidth = Raylib.GetScreenWidth();
+            screenHeight = Raylib.GetScreenHeight();
             if (IsCursorHidden())
                 UpdateCamera(&camera);
 
@@ -59,7 +64,7 @@ class Program
                 else
                     DisableCursor();
             }
-            building.RuntimeBD(camera);
+            building.RuntimeBD(camera, buildingPos);
 
             Raylib.BeginDrawing();
 
@@ -72,7 +77,7 @@ class Program
             // DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
             // DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
 
-	                building.RuntimeAD(camera);
+            building.RuntimeAD(camera);
             Raylib.EndMode3D();
 
             DrawFPS(GetScreenWidth() - 80, 12);
@@ -84,10 +89,42 @@ class Program
                 20,
                 BLACK
             );
+            // Create a RayGUI window
+            GuiGroupBox(vector3EditorRect, "Vector3 Editor");
+	    GuiPanel(vector3EditorRect, null);
+            buildingPos.X = GuiSliderBar(
+                new Rectangle(vector3EditorRect.x + 90, vector3EditorRect.y + 30, 120, 20),
+                "X",
+                null,
+                buildingPos.X,
+                -1000.0f,
+                1000.0f
+            );
+            buildingPos.Y = GuiSliderBar(
+                new Rectangle(vector3EditorRect.x + 90, vector3EditorRect.y + 60, 120, 20),
+                "Y",
+                null,
+                buildingPos.Y,
+                -1000.0f,
+                1000.0f
+            );
+            buildingPos.Z = GuiSliderBar(
+                new Rectangle(vector3EditorRect.x + 90, vector3EditorRect.y + 90, 120, 20),
+                "Z",
+                null,
+                buildingPos.Z,
+                -1000.0f,
+                1000.0f
+            );
+            DrawText(
+                $"Vector3: ({buildingPos.X}, {buildingPos.Y}, {buildingPos.Z})",
+                20,
+                200,
+                20,
+                DARKGRAY
+            );
 
-            GuiPanel(new Rectangle(12, 12, 100, 200), null);
-
-            GuiButton(new Rectangle(12, 12, 100, 50), "Kakske");
+            // Create a Vector3 editor using RayGUI
 
             Raylib.EndDrawing();
         }

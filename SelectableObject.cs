@@ -24,11 +24,12 @@ class SelectableObject
 
         ray = new Ray(); // Picking line ray
         collision = new RayCollision();
-	buildingName= name;
+        buildingName = name;
     }
 
-    public unsafe void RuntimeBD(Camera3D camera)
+    public unsafe void RuntimeBD(Camera3D camera, Vector3 newPos)
     {
+	    cubePosition = newPos;
         if (IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT))
         {
             if (!collision.hit)
