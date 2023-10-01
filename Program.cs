@@ -1,12 +1,15 @@
 ﻿using System.Numerics;
-using Raylib_cs;
-using static Raylib_cs.Raylib;
-using static Examples.Rlights;
-using Examples;
-using rlImGui_cs;
-using ImGuiNET;
+using Raylib_CsLo;
+// using raylibExtras;
 
-namespace HelloWorld;
+using static Raylib_CsLo.Raylib;
+using static Raylib_CsLo.RayGui;
+
+// using rlImGui_cs;
+// using ImGuiNET;
+// using static Raylib_CsLo.Camera3D;
+
+namespace FormalEngine;
 
 class Program
 {
@@ -14,152 +17,81 @@ class Program
     {
         const int screenWidth = 1280;
         const int screenHeight = 720;
-        Raylib.SetTraceLogCallback(&Logging.LogConsole);
-	Raylib.SetConfigFlags(ConfigFlags.FLAG_MSAA_4X_HINT | ConfigFlags.FLAG_VSYNC_HINT);
-        Raylib.InitWindow(screenWidth, screenHeight, "Hello World");
+        // Raylib.SetTraceLogCallback(&Logging.LogConsole);
+        Raylib.SetConfigFlags(ConfigFlags.FLAG_MSAA_4X_HINT | ConfigFlags.FLAG_VSYNC_HINT);
+        Raylib.InitWindow(screenWidth, screenHeight, "Formal Engine");
         Raylib.SetWindowState(ConfigFlags.FLAG_WINDOW_RESIZABLE);
         Raylib.InitAudioDevice();
-        Raylib.SetTargetFPS(144);
-	rlImGui.Setup(true);
+        Raylib.SetTargetFPS(60);
+
+        GuiLoadStyle("resources/ui-themes/cyber/style_cyber.rgs");
+        Font uiFont = LoadFontEx("resources/ui-themes/cyber/Kyrou 7 Wide.ttf", 12, 0);
+        GuiSetFont(uiFont);
+        // DisableCursor();
+        // rlImGui.Setup(true);
 
         Camera3D camera = new Camera3D();
         camera.position = new Vector3(5.0f, 5.0f, 5.0f); // Camera position
         camera.target = new Vector3(0.0f, 2.0f, 0.0f); // Camera looking at point
         camera.up = new Vector3(0.0f, 1.0f, 0.0f); // Camera up vector (rotation towards target)
         camera.fovy = 45.0f; // Camera field-of-view Y
-        camera.projection = CameraProjection.CAMERA_PERSPECTIVE;
+        camera.projection_ = CameraProjection.CAMERA_PERSPECTIVE;
 
-        Mesh planeMesh = Raylib.GenMeshPlane(10.0f, 10.0f, 3, 3);
-        Model planeModel = Raylib.LoadModelFromMesh(planeMesh);
+        Image img = GenImageChecked(256, 256, 64, 64, LIGHTGRAY, WHITE);
+        Texture tx = LoadTextureFromImage(img);
+        Mesh planeMesh = GenMeshPlane(10.0f, 10.0f, 3, 3);
+        Model planeModel = LoadModelFromMesh(planeMesh);
         Model model = Raylib.LoadModel("resources/models/gltf/robot.glb");
-
-        Shader shader = LoadShader(
-            "resources/shaders/glsl330/lighting.vs",
-            "resources/shaders/glsl330/lighting.fs"
-        );
-
-        shader.locs[(int)ShaderLocationIndex.SHADER_LOC_VECTOR_VIEW] = GetShaderLocation(
-            shader,
-            "viewPos"
-        );
-
-        int ambientLoc = GetShaderLocation(shader, "ambient");
-        float[] ambient = new[] { 0.1f, 0.1f, 0.1f, 1.0f };
-        Raylib.SetShaderValue(
-            shader,
-            ambientLoc,
-            ambient,
-            ShaderUniformDataType.SHADER_UNIFORM_VEC4
-        );
-        for (int i = 0; i < model.materialCount; i++)
-        {
-            // Set the shader for each material
-            model.materials[i].shader = shader;
-        }
-        // model.materials[0].shader = shader;
-        planeModel.materials[0].shader = shader;
-
-        Light[] lights = new Light[4];
-        lights[0] = CreateLight(
-            0,
-            Examples.LightType.Point,
-            new Vector3(-2, 1, -2),
-            Vector3.Zero,
-            Color.YELLOW,
-            shader
-        );
-        lights[1] = CreateLight(
-            1,
-            Examples.LightType.Point,
-            new Vector3(2, 1, 2),
-            Vector3.Zero,
-            Color.RED,
-            shader
-        );
-        lights[2] = CreateLight(
-            2,
-            Examples.LightType.Point,
-            new Vector3(-2, 1, 2),
-            Vector3.Zero,
-            Color.GREEN,
-            shader
-        );
-        lights[3] = CreateLight(
-            3,
-            Examples.LightType.Point,
-            new Vector3(2, 1, -2),
-            Vector3.Zero,
-            Color.BLUE,
-            shader
-        );
-
-        uint animsCount = 0;
-        uint animIndex = 0;
-        uint animCurrentFrame = 0;
-
-        ReadOnlySpan<ModelAnimation> modelAnimationsSpan = Raylib.LoadModelAnimations(
-            "resources/models/gltf/robot.glb",
-            ref animsCount
-        );
-        ModelAnimation[] modelAnimations = modelAnimationsSpan.ToArray();
-
-        Vector3 position = new Vector3(0.0f, 0.0f, 0.0f);
+        SetMaterialTexture(planeModel.materials, MATERIAL_MAP_DIFFUSE, tx);
+        SelectableObject building = new SelectableObject();
+        building.Initialize("Barracks", new Vector3(0.0f, 1.0f, 0.0f));
+        // Raylib.SetCameraMode(camera, CameraMode.CAMERA_THIRD_PERSON);
 
         while (!Raylib.WindowShouldClose())
         {
-            Raylib.UpdateCamera(ref camera, CameraMode.CAMERA_THIRD_PERSON);
+            if (IsCursorHidden())
+                UpdateCamera(&camera);
 
-            if (IsKeyPressed(KeyboardKey.KEY_Y))
+            if (IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_RIGHT))
             {
-                animCurrentFrame = 0;
-                animIndex++;
-                if (animIndex >= animsCount) // Check if animIndex has reached or exceeded the maximum index
-                {
-                    animIndex = 0; // Reset animIndex to zero
-                }
+                if (IsCursorHidden())
+                    EnableCursor();
+                else
+                    DisableCursor();
             }
-
-            UpdateLightValues(shader, lights[0]);
-            UpdateLightValues(shader, lights[1]);
-            UpdateLightValues(shader, lights[2]);
-            UpdateLightValues(shader, lights[3]);
-
-            // Update the light shader with the camera view position
-            Raylib.SetShaderValue(
-                shader,
-                shader.locs[(int)ShaderLocationIndex.SHADER_LOC_VECTOR_VIEW],
-                camera.position,
-                ShaderUniformDataType.SHADER_UNIFORM_VEC3
-            );
-
-            ModelAnimation anim = modelAnimations[(int)animIndex]; // Explicitly cast animIndex to int
-            animCurrentFrame = (uint)((animCurrentFrame + 1) % anim.frameCount); // Explicitly cast to uint
-            Raylib.UpdateModelAnimation(model, anim, (int)animCurrentFrame); // Explicitly cast animCurrentFrame to int
+            building.RuntimeBD(camera);
 
             Raylib.BeginDrawing();
 
-            Raylib.ClearBackground(Color.RAYWHITE);
+            ClearBackground(SKYBLUE);
 
             Raylib.BeginMode3D(camera);
 
-            Raylib.DrawModel(model, position, 1f, Color.WHITE);
-            DrawModel(planeModel, Vector3.Zero, 1.0f, Color.WHITE);
-
+            DrawModel(planeModel, Vector3.Zero, 1.0f, WHITE);
             Raylib.DrawGrid(10, 1.0f);
+            // DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
+            // DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
 
+	                building.RuntimeAD(camera);
             Raylib.EndMode3D();
 
-            DrawFPS(10, 10);
+            DrawFPS(GetScreenWidth() - 80, 12);
 
-            // Raylib.DrawText("Kakske", 12, 12, 20, Color.BLACK);
-	    rlImGui.Begin();
-	    ImGui.ShowDemoWindow();
-	    rlImGui.End();
+            Raylib.DrawText(
+                "Camera position: " + camera.position,
+                12,
+                GetScreenHeight() - 30,
+                20,
+                BLACK
+            );
+
+            GuiPanel(new Rectangle(12, 12, 100, 200), null);
+
+            GuiButton(new Rectangle(12, 12, 100, 50), "Kakske");
+
             Raylib.EndDrawing();
         }
-        Raylib.UnloadModel(model);
         Raylib.UnloadModel(planeModel);
-	rlImGui.Shutdown();
         Raylib.CloseWindow();
     }
 }

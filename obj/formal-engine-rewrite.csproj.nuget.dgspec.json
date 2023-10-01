@@ -38,17 +38,9 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
-            "ImGui.NET": {
+            "Raylib-CsLo": {
               "target": "Package",
-              "version": "[1.89.9.2, )"
-            },
-            "Raylib-cs": {
-              "target": "Package",
-              "version": "[4.5.0.4, )"
-            },
-            "rlImgui-cs": {
-              "target": "Package",
-              "version": "[1.0.2, )"
+              "version": "[4.2.0.9, )"
             }
           },
           "imports": [

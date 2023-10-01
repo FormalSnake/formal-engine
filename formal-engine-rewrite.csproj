@@ -11,9 +11,23 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Raylib-cs" Version="4.5.0.4" />
-    <PackageReference Include="ImGui.NET" Version="1.89.9.2" />
-    <PackageReference Include="rlImgui-cs" Version="1.0.2" />
+    <!-- <PackageReference Include="Raylib-cs" Version="4.5.0.4" /> -->
+    <!-- <PackageReference Include="ImGui.NET" Version="1.89.9.2" /> -->
+    <PackageReference Include="Raylib-CsLo" Version="4.2.0.9" />
+    <!-- <PackageReference Include="rlImgui-cs" Version="1.0.3" /> -->
   </ItemGroup>
+  <!-- <ItemGroup> -->
+	 <!--  <ProjectReference Include="lib/Raylib-Extras-CsLo-main/raylibExtras-cs/raylibExtras-CsLo.csproj" /> -->
+  <!-- </ItemGroup> -->
+<ItemGroup>
+    <Reference Include="raylibExtras">
+        <HintPath>lib/raylibextra/raylibExtras-CsLo.dll</HintPath>
+    </Reference>
+</ItemGroup>
+
+
+  <!-- <ItemGroup> -->
+  <!--   <ProjectReference Include="lib\rlImGui\rlImGui\rlImGui.csproj" /> -->
+  <!-- </ItemGroup> -->
 
 </Project>

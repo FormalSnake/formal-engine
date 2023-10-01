@@ -1,0 +1,111 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v6.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v6.0": {
+      "raylibExtras-CsLo/1.0.0": {
+        "dependencies": {
+          "Raylib-CsLo": "4.0.0-rc.4.2"
+        },
+        "runtime": {
+          "raylibExtras-CsLo.dll": {}
+        }
+      },
+      "Microsoft.Toolkit.HighPerformance/7.1.1": {
+        "runtime": {
+          "lib/net5.0/Microsoft.Toolkit.HighPerformance.dll": {
+            "assemblyVersion": "7.1.0.0",
+            "fileVersion": "7.1.1.1"
+          }
+        }
+      },
+      "Raylib-CsLo/4.0.0-rc.4.2": {
+        "dependencies": {
+          "Microsoft.Toolkit.HighPerformance": "7.1.1"
+        },
+        "runtime": {
+          "lib/net6.0/Raylib-CsLo.dll": {
+            "assemblyVersion": "0.0.0.18896",
+            "fileVersion": "0.0.0.0"
+          }
+        },
+        "runtimeTargets": {
+          "runtimes/linux-x64/native/libraylib-with-extras.so": {
+            "rid": "linux-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/osx-x64/native/libraylib.dylib": {
+            "rid": "osx-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/raylib-with-extras.dll": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x64/native/raylib-with-extras.pdb": {
+            "rid": "win-x64",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/physac.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/physac.pdb": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/raygui.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/raygui.pdb": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/raylib.dll": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          },
+          "runtimes/win-x86/native/raylib.pdb": {
+            "rid": "win-x86",
+            "assetType": "native",
+            "fileVersion": "0.0.0.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "raylibExtras-CsLo/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Toolkit.HighPerformance/7.1.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-TRnvDpZPXO30hTOtjfLw6Y9BtTKtTpzk9lefeh4RMCaUihWrVKQR454nYH4/mMJAh+LXqfAPyk0kfkJs0Amopw==",
+      "path": "microsoft.toolkit.highperformance/7.1.1",
+      "hashPath": "microsoft.toolkit.highperformance.7.1.1.nupkg.sha512"
+    },
+    "Raylib-CsLo/4.0.0-rc.4.2": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-QSQwPci9XKo2FRRejNrsw10u/zQYoMzotoBKZLKceMVqhQ/FLN0bO59yLm6xx7/vCdZck4QiroVb3UGDqo2Pzw==",
+      "path": "raylib-cslo/4.0.0-rc.4.2",
+      "hashPath": "raylib-cslo.4.0.0-rc.4.2.nupkg.sha512"
+    }
+  }
+}
