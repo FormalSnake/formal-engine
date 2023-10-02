@@ -13,7 +13,7 @@ public class UI
 
     public void Initialize()
     {
-        vector3EditorRect = new Rectangle(20, 40, 300, 140);
+        vector3EditorRect = new Rectangle(10, 83, 300, 140);
         sliderSensitivity = 1.0f;
         pos = new Vector3(0.0f, 1.0f, 0.0f);
     }
@@ -21,7 +21,7 @@ public class UI
     public unsafe void XYZEditor()
     {
         // Create a RayGUI window
-        GuiGroupBox(vector3EditorRect, "Vector3 Editor");
+        GuiGroupBox(vector3EditorRect, "");
         GuiPanel(vector3EditorRect, null);
         pos.X = GuiSliderBar(
             new Rectangle(vector3EditorRect.x + 90, vector3EditorRect.y + 30, 120, 20),
@@ -47,6 +47,6 @@ public class UI
             -100.0f,
             100.0f
         );
-        DrawText($"Vector3: ({pos.X}, {pos.Y}, {pos.Z})", 20, 200, 20, DARKGRAY);
+        DrawText($"Vector3: ({pos.X}, {pos.Y}, {pos.Z})", 10, 233, 20, DARKGRAY);
     }
 }

@@ -18,7 +18,11 @@ class Program
         int screenWidth = 1280;
         int screenHeight = 720;
         // Raylib.SetTraceLogCallback(&Logging.LogConsole);
-        Raylib.SetConfigFlags(ConfigFlags.FLAG_MSAA_4X_HINT | ConfigFlags.FLAG_VSYNC_HINT);
+        Raylib.SetConfigFlags(
+            ConfigFlags.FLAG_MSAA_4X_HINT
+                | ConfigFlags.FLAG_VSYNC_HINT
+                | ConfigFlags.FLAG_WINDOW_UNDECORATED
+        );
         Raylib.InitWindow(screenWidth, screenHeight, "Formal Engine");
         Raylib.SetWindowState(ConfigFlags.FLAG_WINDOW_RESIZABLE);
         Raylib.InitAudioDevice();
@@ -39,10 +43,43 @@ class Program
         camera.projection_ = CameraProjection.CAMERA_PERSPECTIVE;
         bool buttonPressed = false;
 
-        while (!Raylib.WindowShouldClose())
+        Vector2 mousePosition = Vector2.Zero;
+        Vector2 windowPosition = new Vector2(
+            Raylib.GetMonitorWidth(GetCurrentMonitor()) / 2 - GetScreenWidth() / 2,
+            Raylib.GetScreenHeight() / 2 - GetScreenHeight() / 4
+        );
+        Vector2 panOffset = mousePosition;
+        bool dragWindow = false;
+        SetWindowPosition((int)windowPosition.X, (int)windowPosition.Y);
+
+        bool exitWindow = false;
+
+        while (!exitWindow && !Raylib.WindowShouldClose())
         {
+            mousePosition = GetMousePosition();
             screenWidth = Raylib.GetScreenWidth();
             screenHeight = Raylib.GetScreenHeight();
+
+            if (IsMouseButtonDown(MOUSE_LEFT_BUTTON) && !dragWindow)
+            {
+                if (CheckCollisionPointRec(mousePosition, new Rectangle(0, 0, screenWidth, 20)))
+                {
+                    dragWindow = true;
+                    panOffset = mousePosition;
+                }
+            }
+
+            if (dragWindow)
+            {
+                windowPosition.X += (mousePosition.X - panOffset.X);
+                windowPosition.Y += (mousePosition.Y - panOffset.Y);
+
+                SetWindowPosition((int)windowPosition.X, (int)windowPosition.Y);
+
+                if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+                    dragWindow = false;
+            }
+
             if (IsCursorHidden())
                 UpdateCamera(&camera);
 
@@ -53,10 +90,24 @@ class Program
                 else
                     DisableCursor();
             }
+            BeginDrawing();
+	                exitWindow = GuiWindowBox(
+                new Rectangle(0, 0, screenWidth, screenHeight),
+                "FormalEngine"
+            );
+            if (buttonPressed)
+            {
+                buildingEditor.Loop(camera);
+		if (GuiButton(new Rectangle(10, 33, 100, 40), "Exit"))
+                {
+                    // Exit the building editor and reset the buttonPressed flag
+                    buttonPressed = false;
+                    // Add any necessary logic to clean up the building editor here
+                }
+            }
             if (!buttonPressed)
             {
-                BeginDrawing();
-            GuiWindowBox(new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight()), "FormalEngine");
+                // BeginDrawing();
                 string text = "Formal Engine";
                 int fontSize = 40;
 
@@ -72,12 +123,10 @@ class Program
                     new Rectangle(screenWidth / 2 - 100, screenHeight / 2 - 50, 200, 100),
                     "Building editor"
                 );
-                EndDrawing();
+                // EndDrawing();
             }
-            else
-            {
-                buildingEditor.Loop(camera);
-            }
+
+            EndDrawing();
         }
         buildingEditor.Unload();
         Raylib.CloseWindow();

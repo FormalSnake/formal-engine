@@ -42,7 +42,7 @@ public class BuildingEditor
         screenHeight = Raylib.GetScreenHeight();
         building.RuntimeBD(camera, buildingPos);
 
-        Raylib.BeginDrawing();
+        // Raylib.BeginDrawing();
 
         ClearBackground(SKYBLUE);
 
@@ -56,7 +56,7 @@ public class BuildingEditor
         building.RuntimeAD(camera);
         Raylib.EndMode3D();
 
-        DrawFPS(GetScreenWidth() - 80, 12);
+        DrawFPS(GetScreenWidth() - 80, 33);
 
         Raylib.DrawText(
             "Camera position: " + camera.position,
@@ -69,7 +69,7 @@ public class BuildingEditor
         buildingPos = vectorEditor.pos;
         // Create a Vector3 editor using RayGUI
 
-        Raylib.EndDrawing();
+        // Raylib.EndDrawing();
     }
 
     public unsafe void Unload()
