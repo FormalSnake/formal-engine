@@ -29,7 +29,7 @@ class SelectableObject
 
     public unsafe void RuntimeBD(Camera3D camera, Vector3 newPos)
     {
-	    cubePosition = newPos;
+        cubePosition = newPos;
         if (IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT))
         {
             if (!collision.hit)

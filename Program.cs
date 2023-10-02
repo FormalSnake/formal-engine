@@ -46,8 +46,8 @@ class Program
         SelectableObject building = new SelectableObject();
         Vector3 buildingPos = new Vector3(0.0f, 1.0f, 0.0f);
         building.Initialize("Barracks", buildingPos);
-        Rectangle vector3EditorRect = new Rectangle(20, 40, 300, 140);
-float sliderSensitivity = 1.0f;
+        UI vectorEditor = new UI();
+        vectorEditor.Initialize();
         // Raylib.SetCameraMode(camera, CameraMode.CAMERA_THIRD_PERSON);
 
         while (!Raylib.WindowShouldClose())
@@ -89,41 +89,8 @@ float sliderSensitivity = 1.0f;
                 20,
                 BLACK
             );
-            // Create a RayGUI window
-            GuiGroupBox(vector3EditorRect, "Vector3 Editor");
-	    GuiPanel(vector3EditorRect, null);
-            buildingPos.X = GuiSliderBar(
-                new Rectangle(vector3EditorRect.x + 90, vector3EditorRect.y + 30, 120, 20),
-                "X",
-                null,
-                buildingPos.X,
-                -100.0f,
-                100.0f
-            );
-            buildingPos.Y = GuiSliderBar(
-                new Rectangle(vector3EditorRect.x + 90, vector3EditorRect.y + 60, 120, 20),
-                "Y",
-                null,
-                buildingPos.Y,
-                -100.0f,
-                100.0f
-            );
-            buildingPos.Z = GuiSliderBar(
-                new Rectangle(vector3EditorRect.x + 90, vector3EditorRect.y + 90, 120, 20),
-                "Z",
-                null,
-                buildingPos.Z,
-                -100.0f,
-                100.0f
-            );
-            DrawText(
-                $"Vector3: ({buildingPos.X}, {buildingPos.Y}, {buildingPos.Z})",
-                20,
-                200,
-                20,
-                DARKGRAY
-            );
-
+            vectorEditor.XYZEditor();
+            buildingPos = vectorEditor.pos;
             // Create a Vector3 editor using RayGUI
 
             Raylib.EndDrawing();
