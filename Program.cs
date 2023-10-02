@@ -56,7 +56,7 @@ class Program
             if (!buttonPressed)
             {
                 BeginDrawing();
-                GuiPanel(new Rectangle(0, 0, screenWidth, screenHeight), null);
+            GuiWindowBox(new Rectangle(0, 0, Raylib.GetScreenWidth(), Raylib.GetScreenHeight()), "FormalEngine");
                 string text = "Formal Engine";
                 int fontSize = 40;
 
