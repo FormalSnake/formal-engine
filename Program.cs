@@ -29,26 +29,15 @@ class Program
         GuiSetFont(uiFont);
         // DisableCursor();
         // rlImGui.Setup(true);
-
+        BuildingEditor buildingEditor = new BuildingEditor();
+        buildingEditor.Initialize();
         Camera3D camera = new Camera3D();
         camera.position = new Vector3(5.0f, 5.0f, 5.0f); // Camera position
         camera.target = new Vector3(0.0f, 2.0f, 0.0f); // Camera looking at point
         camera.up = new Vector3(0.0f, 1.0f, 0.0f); // Camera up vector (rotation towards target)
         camera.fovy = 45.0f; // Camera field-of-view Y
         camera.projection_ = CameraProjection.CAMERA_PERSPECTIVE;
-
-        Image img = GenImageChecked(256, 256, 64, 64, LIGHTGRAY, WHITE);
-        Texture tx = LoadTextureFromImage(img);
-        Mesh planeMesh = GenMeshPlane(10.0f, 10.0f, 3, 3);
-        Model planeModel = LoadModelFromMesh(planeMesh);
-        Model model = Raylib.LoadModel("resources/models/gltf/robot.glb");
-        SetMaterialTexture(planeModel.materials, MATERIAL_MAP_DIFFUSE, tx);
-        SelectableObject building = new SelectableObject();
-        Vector3 buildingPos = new Vector3(0.0f, 1.0f, 0.0f);
-        building.Initialize("Barracks", buildingPos);
-        UI vectorEditor = new UI();
-        vectorEditor.Initialize();
-        // Raylib.SetCameraMode(camera, CameraMode.CAMERA_THIRD_PERSON);
+        bool buttonPressed = false;
 
         while (!Raylib.WindowShouldClose())
         {
@@ -64,38 +53,33 @@ class Program
                 else
                     DisableCursor();
             }
-            building.RuntimeBD(camera, buildingPos);
+            if (!buttonPressed)
+            {
+                BeginDrawing();
+                GuiPanel(new Rectangle(0, 0, screenWidth, screenHeight), null);
+                string text = "Formal Engine";
+                int fontSize = 40;
 
-            Raylib.BeginDrawing();
+                // Measure the text's width
+                float textWidth = Raylib.MeasureText(text, fontSize);
 
-            ClearBackground(SKYBLUE);
+                // Calculate the X-coordinate to center the text
+                float centerX = (Raylib.GetScreenWidth() - textWidth) / 2;
 
-            Raylib.BeginMode3D(camera);
-
-            DrawModel(planeModel, Vector3.Zero, 1.0f, WHITE);
-            Raylib.DrawGrid(10, 1.0f);
-            // DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
-            // DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
-
-            building.RuntimeAD(camera);
-            Raylib.EndMode3D();
-
-            DrawFPS(GetScreenWidth() - 80, 12);
-
-            Raylib.DrawText(
-                "Camera position: " + camera.position,
-                12,
-                GetScreenHeight() - 30,
-                20,
-                BLACK
-            );
-            vectorEditor.XYZEditor();
-            buildingPos = vectorEditor.pos;
-            // Create a Vector3 editor using RayGUI
-
-            Raylib.EndDrawing();
+                // Draw the centered text
+                Raylib.DrawText(text, (int)centerX, 100, fontSize, WHITE);
+                buttonPressed = GuiButton(
+                    new Rectangle(screenWidth / 2 - 100, screenHeight / 2 - 50, 200, 100),
+                    "Building editor"
+                );
+                EndDrawing();
+            }
+            else
+            {
+                buildingEditor.Loop(camera);
+            }
         }
-        Raylib.UnloadModel(planeModel);
+        buildingEditor.Unload();
         Raylib.CloseWindow();
     }
 }

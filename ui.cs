@@ -15,7 +15,7 @@ public class UI
     {
         vector3EditorRect = new Rectangle(20, 40, 300, 140);
         sliderSensitivity = 1.0f;
-        pos = Vector3.Zero;
+        pos = new Vector3(0.0f, 1.0f, 0.0f);
     }
 
     public unsafe void XYZEditor()
