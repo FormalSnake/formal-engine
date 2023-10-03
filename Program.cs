@@ -91,14 +91,14 @@ class Program
                     DisableCursor();
             }
             BeginDrawing();
-	                exitWindow = GuiWindowBox(
+            exitWindow = GuiWindowBox(
                 new Rectangle(0, 0, screenWidth, screenHeight),
                 "FormalEngine"
             );
             if (buttonPressed)
             {
                 buildingEditor.Loop(camera);
-		if (GuiButton(new Rectangle(10, 33, 100, 40), "Exit"))
+                if (GuiButton(new Rectangle(10, 33, 100, 40), "Exit"))
                 {
                     // Exit the building editor and reset the buttonPressed flag
                     buttonPressed = false;

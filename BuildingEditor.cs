@@ -29,13 +29,13 @@ public class BuildingEditor
         planeMesh = GenMeshPlane(10.0f, 10.0f, 3, 3);
         planeModel = LoadModelFromMesh(planeMesh);
         model = Raylib.LoadModel("resources/models/gltf/pillbox.glb");
-	// Texture texture = LoadTexture("resources/models/gltf/pillbox/textures/concrete_dirty2.jpeg");
-	// model.materials[0].maps[0].texture = texture;
-	// SetMaterialTexture(model.materials, MATERIAL_MAP_DIFFUSE, texture);
+        // Texture texture = LoadTexture("resources/models/gltf/pillbox/textures/concrete_dirty2.jpeg");
+        // model.materials[0].maps[0].texture = texture;
+        // SetMaterialTexture(model.materials, MATERIAL_MAP_DIFFUSE, texture);
         SetMaterialTexture(planeModel.materials, MATERIAL_MAP_DIFFUSE, tx);
         building = new SelectableObject();
         buildingPos = new Vector3(0.0f, 0.0f, 0.0f);
-        building.Initialize("Barracks", buildingPos);
+        building.Initialize("Barracks", buildingPos, model);
         vectorEditor = new UI();
         vectorEditor.Initialize();
         // Raylib.SetCameraMode(camera, CameraMode.CAMERA_THIRD_PERSON);
@@ -45,7 +45,7 @@ public class BuildingEditor
     {
         screenWidth = Raylib.GetScreenWidth();
         screenHeight = Raylib.GetScreenHeight();
-        building.RuntimeBD(camera, buildingPos, model);
+        building.RuntimeBD(camera, buildingPos);
 
         // Raylib.BeginDrawing();
 
@@ -58,7 +58,7 @@ public class BuildingEditor
         // DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
         // DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
 
-        building.RuntimeAD(camera, model);
+        building.RuntimeAD(camera);
         Raylib.EndMode3D();
 
         DrawFPS(GetScreenWidth() - 80, 33);

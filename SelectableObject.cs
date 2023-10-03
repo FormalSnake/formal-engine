@@ -14,8 +14,10 @@ class SelectableObject
     private static Ray ray;
     private static RayCollision collision;
     private static string buildingName;
+    private static BoundingBox bounds;
+    private static Model model;
 
-    public unsafe void Initialize(string name, Vector3 position)
+    public unsafe void Initialize(string name, Vector3 position, Model modelLoad)
     {
         // Initialize the variables here
         cubePosition = position;
@@ -25,9 +27,11 @@ class SelectableObject
         ray = new Ray(); // Picking line ray
         collision = new RayCollision();
         buildingName = name;
+        model = modelLoad;
+        bounds = GetModelBoundingBox(model);
     }
 
-    public unsafe void RuntimeBD(Camera3D camera, Vector3 newPos, Model model)
+    public unsafe void RuntimeBD(Camera3D camera, Vector3 newPos)
     {
         cubePosition = newPos;
         if (IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT))
@@ -39,19 +43,19 @@ class SelectableObject
                 // Check collision between ray and box
                 collision = GetRayCollisionBox(
                     ray,
-		    GetMeshBoundingBox(model.meshes[0])
-                    // new BoundingBox(
-                    //     new Vector3(
-                    //         cubePosition.X - cubeSize.X / 2,
-                    //         cubePosition.Y - cubeSize.Y / 2,
-                    //         cubePosition.Z - cubeSize.Z / 2
-                    //     ),
-                    //     new Vector3(
-                    //         cubePosition.X + cubeSize.X / 2,
-                    //         cubePosition.Y + cubeSize.Y / 2,
-                    //         cubePosition.Z + cubeSize.Z / 2
-                    //     )
-                    // )
+                    bounds
+                // new BoundingBox(
+                //     new Vector3(
+                //         cubePosition.X - cubeSize.X / 2,
+                //         cubePosition.Y - cubeSize.Y / 2,
+                //         cubePosition.Z - cubeSize.Z / 2
+                //     ),
+                //     new Vector3(
+                //         cubePosition.X + cubeSize.X / 2,
+                //         cubePosition.Y + cubeSize.Y / 2,
+                //         cubePosition.Z + cubeSize.Z / 2
+                //     )
+                // )
                 );
             }
             else
@@ -76,13 +80,12 @@ class SelectableObject
         }
     }
 
-    public unsafe void RuntimeAD(Camera3D camera, Model model)
+    public unsafe void RuntimeAD(Camera3D camera)
     {
-	    BoundingBox bounds = 		    GetMeshBoundingBox(model.meshes[0]);
         if (collision.hit)
         {
             // DrawCube(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, RED);
-	    	    DrawModel(model, cubePosition, 0.1f, RED);
+            DrawModel(model, cubePosition, 0.1f, RED);
             // DrawCubeWires(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, MAROON);
             //
             // DrawCubeWires(
@@ -92,12 +95,12 @@ class SelectableObject
             //     cubeSize.Z + 0.2f,
             //     GREEN
             // );
-	    DrawBoundingBox(bounds, GREEN);
+            DrawBoundingBox(bounds, GREEN);
         }
         else
         {
             // DrawCube(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, GRAY);
-	    DrawModel(model, cubePosition, 0.1f, WHITE);
+            DrawModel(model, cubePosition, 0.1f, WHITE);
             // DrawCubeWires(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, DARKGRAY);
         }
     }
