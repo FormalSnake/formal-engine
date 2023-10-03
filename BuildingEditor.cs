@@ -19,6 +19,8 @@ public class BuildingEditor
     private UI vectorEditor;
     int screenWidth = 1280;
     int screenHeight = 720;
+    Mesh buildingMesh;
+    Model buildingModel;
 
     public unsafe void Initialize()
     {
@@ -26,7 +28,10 @@ public class BuildingEditor
         tx = LoadTextureFromImage(img);
         planeMesh = GenMeshPlane(10.0f, 10.0f, 3, 3);
         planeModel = LoadModelFromMesh(planeMesh);
-        model = Raylib.LoadModel("resources/models/gltf/robot.glb");
+        model = Raylib.LoadModel("resources/models/gltf/pillbox.glb");
+	// Texture texture = LoadTexture("resources/models/gltf/pillbox/textures/concrete_dirty2.jpeg");
+	// model.materials[0].maps[0].texture = texture;
+	// SetMaterialTexture(model.materials, MATERIAL_MAP_DIFFUSE, texture);
         SetMaterialTexture(planeModel.materials, MATERIAL_MAP_DIFFUSE, tx);
         building = new SelectableObject();
         buildingPos = new Vector3(0.0f, 1.0f, 0.0f);
@@ -40,7 +45,7 @@ public class BuildingEditor
     {
         screenWidth = Raylib.GetScreenWidth();
         screenHeight = Raylib.GetScreenHeight();
-        building.RuntimeBD(camera, buildingPos);
+        building.RuntimeBD(camera, buildingPos, model);
 
         // Raylib.BeginDrawing();
 
@@ -53,7 +58,7 @@ public class BuildingEditor
         // DrawCube(cubePosition, 2.0f, 2.0f, 2.0f, RED);
         // DrawCubeWires(cubePosition, 2.0f, 2.0f, 2.0f, MAROON);
 
-        building.RuntimeAD(camera);
+        building.RuntimeAD(camera, model);
         Raylib.EndMode3D();
 
         DrawFPS(GetScreenWidth() - 80, 33);

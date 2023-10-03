@@ -27,7 +27,7 @@ class SelectableObject
         buildingName = name;
     }
 
-    public unsafe void RuntimeBD(Camera3D camera, Vector3 newPos)
+    public unsafe void RuntimeBD(Camera3D camera, Vector3 newPos, Model model)
     {
         cubePosition = newPos;
         if (IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT))
@@ -39,18 +39,19 @@ class SelectableObject
                 // Check collision between ray and box
                 collision = GetRayCollisionBox(
                     ray,
-                    new BoundingBox(
-                        new Vector3(
-                            cubePosition.X - cubeSize.X / 2,
-                            cubePosition.Y - cubeSize.Y / 2,
-                            cubePosition.Z - cubeSize.Z / 2
-                        ),
-                        new Vector3(
-                            cubePosition.X + cubeSize.X / 2,
-                            cubePosition.Y + cubeSize.Y / 2,
-                            cubePosition.Z + cubeSize.Z / 2
-                        )
-                    )
+		    GetMeshBoundingBox(model.meshes[0])
+                    // new BoundingBox(
+                    //     new Vector3(
+                    //         cubePosition.X - cubeSize.X / 2,
+                    //         cubePosition.Y - cubeSize.Y / 2,
+                    //         cubePosition.Z - cubeSize.Z / 2
+                    //     ),
+                    //     new Vector3(
+                    //         cubePosition.X + cubeSize.X / 2,
+                    //         cubePosition.Y + cubeSize.Y / 2,
+                    //         cubePosition.Z + cubeSize.Z / 2
+                    //     )
+                    // )
                 );
             }
             else
@@ -75,25 +76,29 @@ class SelectableObject
         }
     }
 
-    public unsafe void RuntimeAD(Camera3D camera)
+    public unsafe void RuntimeAD(Camera3D camera, Model model)
     {
+	    BoundingBox bounds = 		    GetMeshBoundingBox(model.meshes[0]);
         if (collision.hit)
         {
-            DrawCube(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, RED);
-            DrawCubeWires(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, MAROON);
-
-            DrawCubeWires(
-                cubePosition,
-                cubeSize.X + 0.2f,
-                cubeSize.Y + 0.2f,
-                cubeSize.Z + 0.2f,
-                GREEN
-            );
+            // DrawCube(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, RED);
+	    	    DrawModel(model, cubePosition, 0.1f, RED);
+            // DrawCubeWires(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, MAROON);
+            //
+            // DrawCubeWires(
+            //     cubePosition,
+            //     cubeSize.X + 0.2f,
+            //     cubeSize.Y + 0.2f,
+            //     cubeSize.Z + 0.2f,
+            //     GREEN
+            // );
+	    DrawBoundingBox(bounds, GREEN);
         }
         else
         {
-            DrawCube(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, GRAY);
-            DrawCubeWires(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, DARKGRAY);
+            // DrawCube(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, GRAY);
+	    DrawModel(model, cubePosition, 0.1f, WHITE);
+            // DrawCubeWires(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, DARKGRAY);
         }
     }
 }
