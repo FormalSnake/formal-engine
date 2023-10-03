@@ -34,7 +34,7 @@ public class BuildingEditor
 	// SetMaterialTexture(model.materials, MATERIAL_MAP_DIFFUSE, texture);
         SetMaterialTexture(planeModel.materials, MATERIAL_MAP_DIFFUSE, tx);
         building = new SelectableObject();
-        buildingPos = new Vector3(0.0f, 1.0f, 0.0f);
+        buildingPos = new Vector3(0.0f, 0.0f, 0.0f);
         building.Initialize("Barracks", buildingPos);
         vectorEditor = new UI();
         vectorEditor.Initialize();

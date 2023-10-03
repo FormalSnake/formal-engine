@@ -61,7 +61,7 @@ class SelectableObject
         }
 
         cubeScreenPosition = GetWorldToScreen(
-            new Vector3(cubePosition.X, cubePosition.Y + 2.5f, cubePosition.Z),
+            new Vector3(cubePosition.X, cubePosition.Y + 5.0f, cubePosition.Z),
             camera
         );
         if (collision.hit)
