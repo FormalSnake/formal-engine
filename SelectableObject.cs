@@ -65,7 +65,7 @@ class SelectableObject
         }
 
         cubeScreenPosition = GetWorldToScreen(
-            new Vector3(cubePosition.X, cubePosition.Y + 5.0f, cubePosition.Z),
+            new Vector3(cubePosition.X, cubePosition.Y + 3.0f, cubePosition.Z),
             camera
         );
         if (collision.hit)
@@ -85,7 +85,7 @@ class SelectableObject
         if (collision.hit)
         {
             // DrawCube(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, RED);
-            DrawModel(model, cubePosition, 0.1f, RED);
+            DrawModel(model, cubePosition, 1.0f, RED);
             // DrawCubeWires(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, MAROON);
             //
             // DrawCubeWires(
@@ -100,7 +100,7 @@ class SelectableObject
         else
         {
             // DrawCube(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, GRAY);
-            DrawModel(model, cubePosition, 0.1f, WHITE);
+            DrawModel(model, cubePosition, 1.0f, WHITE);
             // DrawCubeWires(cubePosition, cubeSize.X, cubeSize.Y, cubeSize.Z, DARKGRAY);
         }
     }
